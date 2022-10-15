@@ -7,7 +7,7 @@ Set your environment variables to macOS, Linux, [fly.io](https://fly.io) and mor
 - Set environment variables to macOS or Linux.
 
 ```sh
-setenv apply local
+setenv apply debug
 ```
 
 - Set environment variables to others platform.
