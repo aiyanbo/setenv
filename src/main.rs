@@ -1,6 +1,7 @@
 use clap::Parser;
 use log::error;
 use setenv::cmd::env::apply::{EnvApplyArgs, EnvApplyCommandHandler};
+use setenv::cmd::env::set::{EnvSetArgs, EnvSetCommandHandler};
 use setenv::cmd::CommandHandler;
 
 #[derive(Parser, Debug)]
@@ -13,6 +14,7 @@ struct Opts {
 #[derive(Parser, Debug)]
 enum SubCommand {
     Apply(EnvApplyArgs),
+    Set(EnvSetArgs),
 }
 
 #[tokio::main]
@@ -25,6 +27,7 @@ async fn main() {
     let opts = Opts::parse();
     let future = match opts.command {
         SubCommand::Apply(ref args) => EnvApplyCommandHandler {}.handle(args),
+        SubCommand::Set(ref args) => EnvSetCommandHandler {}.handle(args),
     };
     match future.await {
         Ok(_) => {}
